@@ -22,13 +22,16 @@ public final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 private extension SceneDelegate {
     private func makeRootViewController() -> UIViewController {
-        let mainViewController = MainViewController()
+        let mainViewController = RootViewController()
+        
         let navigationController = UINavigationController(rootViewController: mainViewController)
+        
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
         navigationController.navigationBar.compactAppearance = navigationBarAppearance
         navigationController.navigationBar.compactAppearance = navigationBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        
         return navigationController
     }
 }

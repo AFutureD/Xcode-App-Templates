@@ -4,31 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "App",
+    name: "BaseKit",
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "App",
-            targets: ["App"]),
-    ],
-    dependencies: [
-        .package(name: "Third", path: "../Third")
+            name: "BaseKit",
+            targets: ["BaseKit"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "App",
-            dependencies: [.third]
-            
-        ),
+            name: "BaseKit"),
         .testTarget(
-            name: "AppTests",
-            dependencies: ["App"]),
+            name: "BaseKitTests",
+            dependencies: ["BaseKit"]),
     ]
 )
-
-extension Target.Dependency {
-    static let third = Self.product(name: "Third", package: "Third")
-}

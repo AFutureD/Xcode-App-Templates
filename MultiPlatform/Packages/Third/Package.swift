@@ -13,8 +13,8 @@ let package = Package(
             targets: ["Third"]
         ),
         .library(
-            name: "Third-UI",
-            targets: ["Third-UI"]
+            name: "ThirdUI",
+            targets: ["ThirdUI"]
         ),
     ],
     dependencies: [
@@ -30,7 +30,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "Third-UI"
+            name: "ThirdUI"
         ),
         .testTarget(
             name: "ThirdTests",

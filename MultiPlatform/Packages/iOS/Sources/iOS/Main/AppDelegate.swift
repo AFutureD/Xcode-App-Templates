@@ -1,13 +1,12 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  File.swift
+//  
+//
+//  Created by 尼诺 on 2023/12/8.
+//
 
-import SwiftUI
-import ComposableArchitecture
-
-#if os(iOS)
-
+import Foundation
 import UIKit
-import iOS
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,18 +25,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return .defaultScene
     }
 }
-
-#else
-
-import macOS
-
-@main
-struct MacApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-
-#endif

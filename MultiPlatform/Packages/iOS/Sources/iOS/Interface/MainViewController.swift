@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import ComposableArchitecture
 
-public class MainViewController: UIViewController {
+public class RootViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
