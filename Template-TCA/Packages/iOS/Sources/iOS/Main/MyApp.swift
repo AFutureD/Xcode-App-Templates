@@ -10,7 +10,8 @@ import OSLog
 
 import ComposableArchitecture
 import SwiftUI
-
+import Common
+import CommonUI
 
 
 @main
@@ -18,7 +19,7 @@ struct MyApp: App {
     
     static let log = Logger()
     
-    static let store = Store(initialState: ContactsFeature.State()) {
+    static let store = Store(initialState: ContactsFeature.State(contacts: [])) {
         ContactsFeature()._printChanges(.init(printChange: { receivedAction, oldState, newState in
             var target = ""
             target.write("received action:\n")

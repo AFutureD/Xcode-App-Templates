@@ -7,34 +7,16 @@
 
 import Foundation
 import ComposableArchitecture
+import Domain
 
 
-struct Contact: Equatable, Identifiable {
-    let id: UUID
-    var name: String
-}
-
-struct ContactsFeatureState: Equatable {
-    var contacts: IdentifiedArrayOf<Contact> = []
-    
-    @PresentationState var present: Destination?
-    
-    var navigationPath = StackState<ContactDetailFeature.State>()
-}
-
-@CasePathable
-enum ContactsFeatureAction {
-    case addButtonTapped
-    case deleteButtonTapped(id: Contact.ID)
-    case present(PresentationAction<Destination>)
-    case contactOnPath(StackAction<ContactDetailFeature.State, ContactDetailFeature.Action>)
-}
-
-struct ContactsFeature: Reducer {
+public struct ContactsFeature: Reducer {
         
     @Dependency(\.uuid) var uuid
     
-    var body: some Reducer<ContactsFeatureState, ContactsFeatureAction> {
+    public init() {}
+    
+    public var body: some Reducer<ContactsFeatureState, ContactsFeatureAction> {
         Reduce { state, action in
             switch action {
             case .addButtonTapped:
@@ -93,4 +75,13 @@ extension ContactsFeature {
 }
 
 extension ContactsFeature {
+    
+    public struct Destination: Reducer {
+        
+        public var body: some Reducer<ContactsFeatureState.Destination, ContactsFeatureAction.Destination> {
+            Scope(state: \.addContact, action: \.addContact) {
+                AddContactFeature()
+            }
+        }
+    }
 }

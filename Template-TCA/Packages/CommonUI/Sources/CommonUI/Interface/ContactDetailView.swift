@@ -8,7 +8,8 @@
 import Foundation
 import ComposableArchitecture
 import SwiftUI
-
+import Domain
+import Common
 
 struct ContactDetailView: View {
     let store: StoreOf<ContactDetailFeature>

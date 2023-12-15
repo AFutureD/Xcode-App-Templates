@@ -8,12 +8,17 @@
 import Foundation
 import SwiftUI
 import ComposableArchitecture
+import Domain
+import Common
 
-struct ContactsView: View {
-    let store: StoreOf<ContactsFeature>
+public struct ContactsView: View {
+    private let store: StoreOf<ContactsFeature>
     
+    public init(store: StoreOf<ContactsFeature>) {
+        self.store = store
+    }
     
-    var body: some View {
+    public var body: some View {
         NavigationStackStore(self.store.scope(state: \.navigationPath, action: \.contactOnPath)) {
             WithViewStore(self.store, observe: \.contacts) { viewStore in
                 List {
