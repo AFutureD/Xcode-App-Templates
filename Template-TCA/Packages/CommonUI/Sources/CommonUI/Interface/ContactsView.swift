@@ -28,7 +28,7 @@ public struct ContactsView: View {
                                 Text(contact.name)
                                 Spacer()
                                 Button {
-                                    viewStore.send(.deleteButtonTapped(id: contact.id))
+                                    viewStore.send(.inner(.deleteButtonTapped(id: contact.id)))
                                 } label: {
                                     Image(systemName: "trash")
                                         .foregroundColor(.red)
@@ -42,7 +42,7 @@ public struct ContactsView: View {
                 .toolbar {
                     ToolbarItem {
                         Button {
-                            viewStore.send(.addButtonTapped)
+                            viewStore.send(.inner(.addButtonTapped))
                         } label: {
                             Image(systemName: "plus")
                         }

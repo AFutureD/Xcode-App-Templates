@@ -25,11 +25,11 @@ public struct ContactDetailFeature {
                     await send(.delegate(.confirmDeletion))
                     await self.dismiss()
                 }
-            case .delegate:
-                return .none
-            case .deleteButtonTapped:
+                
+            case .inner(.deleteButtonTapped):
                 state.present = .alert(.confirmDeletion)
                 return .none
+
             default:
                 return .none
             }

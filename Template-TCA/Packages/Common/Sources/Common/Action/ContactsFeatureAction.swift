@@ -11,10 +11,15 @@ import ComposableArchitecture
 
 @CasePathable
 public enum ContactsFeatureAction {
-    case addButtonTapped
-    case deleteButtonTapped(id: Contact.ID)
     case present(PresentationAction<Destination>)
     case contactOnPath(StackAction<ContactDetailFeature.State, ContactDetailFeature.Action>)
+    
+    case inner(Inner)
+    public enum Inner {
+        case addButtonTapped
+        case deleteButtonTapped(id: Contact.ID)
+    }
+    
 }
 
 extension ContactsFeatureAction {

@@ -14,7 +14,10 @@ public enum ContactDetailFeatureAction {
     
     case present(PresentationAction<Destination>)
     
-    case deleteButtonTapped
+    case inner(Inner)
+    public enum Inner {
+        case deleteButtonTapped
+    }
     
     case delegate(Delegate)
     public enum Delegate {

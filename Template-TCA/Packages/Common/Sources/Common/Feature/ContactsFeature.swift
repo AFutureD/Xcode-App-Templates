@@ -19,7 +19,10 @@ public struct ContactsFeature: Reducer {
     public var body: some Reducer<ContactsFeatureState, ContactsFeatureAction> {
         Reduce { state, action in
             switch action {
-            case .addButtonTapped:
+            case let .present(presentAction):
+                return self.presentReduce(state: &state, action: presentAction)
+                
+            case .inner(.addButtonTapped):
                 state.present = .addContact(
                     AddContactFeature.State(
                         contact: Contact(id: self.uuid(), name: "")
@@ -27,10 +30,7 @@ public struct ContactsFeature: Reducer {
                 )
                 return .none
                 
-            case let .present(presentAction):
-                return self.presentReduce(state: &state, action: presentAction)
-                
-            case let .deleteButtonTapped(id: id):
+            case let .inner(.deleteButtonTapped(id: id)):
                 state.present = .confirmDeleteAlert(.deleteConfirmation(id: id))
                 return .none
                 
