@@ -17,15 +17,15 @@ struct AddContactView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             Form {
-                TextField("Name", text: viewStore.binding(get: \.contact.name, send: { .setName($0) }))
+                TextField("Name", text: viewStore.binding(get: \.contact.name, send: { .inner(.setName($0)) }))
                 Button("Save") {
-                    viewStore.send(.saveButtonTapped)
+                    viewStore.send(.inner(.saveButtonTapped))
                 }
             }
             .toolbar {
                 ToolbarItem {
                     Button("Cancel") {
-                        viewStore.send(.cancelButtonTapped)
+                        viewStore.send(.inner(.cancelButtonTapped))
                     }
                 }
             }
@@ -33,21 +33,19 @@ struct AddContactView: View {
     }
 }
 
-struct AddContactPreviews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AddContactView(
-                store: Store(
-                    initialState: AddContactFeature.State(
-                        contact: Contact(
-                            id: UUID(),
-                            name: "Blob"
-                        )
+#Preview {
+    NavigationStack {
+        AddContactView(
+            store: Store(
+                initialState: AddContactFeature.State(
+                    contact: Contact(
+                        id: UUID(),
+                        name: "Blob"
                     )
-                ) {
-                    AddContactFeature()
-                }
-            )
-        }
+                )
+            ) {
+                AddContactFeature()
+            }
+        )
     }
 }

@@ -23,23 +23,23 @@ struct ContactDetailView: View {
             }
             .navigationBarTitle(Text(viewStore.contact.name))
         }
-        .alert(store: self.store.scope(state: \.$alert, action: \.alert))
+        .alert(store: self.store.scope(
+            state: \.$present.alert,
+            action: \.present.alert
+        ))
     }
 }
 
-
-struct ContactDetailPreviews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ContactDetailView(
-                store: Store(
-                    initialState: ContactDetailFeature.State(
-                        contact: Contact(id: UUID(), name: "Blob")
-                    )
-                ) {
-                    ContactDetailFeature()
-                }
-            )
-        }
+#Preview {
+    NavigationStack {
+        ContactDetailView(
+            store: Store(
+                initialState: ContactDetailFeature.State(
+                    contact: Contact(id: UUID(), name: "Blob")
+                )
+            ) {
+                ContactDetailFeature()
+            }
+        )
     }
 }

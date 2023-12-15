@@ -14,7 +14,7 @@ struct ContactsView: View {
     
     
     var body: some View {
-        NavigationStackStore(self.store.scope(state: \.path, action: \.path)) {
+        NavigationStackStore(self.store.scope(state: \.navigationPath, action: \.contactOnPath)) {
             WithViewStore(self.store, observe: \.contacts) { viewStore in
                 List {
                     ForEach(viewStore.state) { contact in
@@ -47,39 +47,33 @@ struct ContactsView: View {
         } destination: { store in
             ContactDetailView(store: store)
         }
-        .sheet(
-            store: self.store.scope(
-                state: \.$destination.addContact,
-                action: \.destination.addContact
-            )
-        ) { addContactStore in
+        .sheet( store: self.store.scope(
+            state: \.$present.addContact,
+            action: \.present.addContact
+        )) { addContactStore in
             NavigationStack {
                 AddContactView(store: addContactStore)
             }
         }
-        .alert(
-            store: self.store.scope(
-                state: \.$destination.alert,
-                action: \.destination.alert
-            )
-        )
+        .alert( store: self.store.scope(
+            state: \.$present.confirmDeleteAlert,
+            action: \.present.confirmDeleteAlert
+        ))
     }
 }
 
-struct ContactsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactsView(
-            store: Store(
-                initialState: ContactsFeature.State(
-                    contacts: [
-                        Contact(id: UUID(), name: "Blob"),
-                        Contact(id: UUID(), name: "Blob Jr"),
-                        Contact(id: UUID(), name: "Blob Sr"),
-                    ]
-                )
-            ) {
-                ContactsFeature()
-            }
-        )
-    }
+#Preview {
+    ContactsView(
+        store: Store(
+            initialState: ContactsFeature.State(
+                contacts: [
+                    Contact(id: UUID(), name: "Blob"),
+                    Contact(id: UUID(), name: "Blob Jr"),
+                    Contact(id: UUID(), name: "Blob Sr"),
+                ]
+            )
+        ) {
+            ContactsFeature()
+        }
+    )
 }

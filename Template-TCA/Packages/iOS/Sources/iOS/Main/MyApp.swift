@@ -6,26 +6,31 @@
 //
 
 import Foundation
-import SwiftUI
-
+import OSLog
 
 import ComposableArchitecture
 import SwiftUI
 
 
+
 @main
 struct MyApp: App {
-//    static let store = Store(initialState: CounterFeature.State()) {
-//        CounterFeature()
-//    }
+    
+    static let log = Logger()
     
     static let store = Store(initialState: ContactsFeature.State()) {
-        ContactsFeature()
+        ContactsFeature()._printChanges(.init(printChange: { receivedAction, oldState, newState in
+            var target = ""
+            target.write("received action:\n")
+            CustomDump.customDump(receivedAction, to: &target, indent: 2)
+            target.write("\n")
+            target.write(diff(oldState, newState).map { "\($0)\n" } ?? "  (No state changes)\n")
+            log.debug("\(target)")
+        }))
     }
     
     var body: some Scene {
         WindowGroup {
-            // CounterView(store: MyApp.store)
             ContactsView(store: MyApp.store)
         }
     }
