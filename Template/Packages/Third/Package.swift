@@ -18,7 +18,6 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.5.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,7 +25,6 @@ let package = Package(
         .target(
             name: "Third",
             dependencies: [
-                .TCA
             ]
         ),
         .target(
@@ -40,5 +38,4 @@ let package = Package(
 )
 
 extension Target.Dependency {
-    static let TCA = Self.product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 }

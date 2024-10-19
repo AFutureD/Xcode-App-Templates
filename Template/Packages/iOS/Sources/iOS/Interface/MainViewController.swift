@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ComposableArchitecture
 
 public class RootViewController: UIViewController {
 
